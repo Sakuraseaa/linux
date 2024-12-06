@@ -923,7 +923,7 @@ void __insert_vm_struct(struct mm_struct *mm, struct vm_area_struct *vmp)
 		pprev = &mm->mmap;
 		while (*pprev && (*pprev)->vm_start <= vmp->vm_start)
 			pprev = &(*pprev)->vm_next;
-	} else {
+	} else { // need-read
 		struct vm_area_struct *prev, *next;
 		avl_insert_neighbours(vmp, &mm->mmap_avl, &prev, &next);
 		pprev = (prev ? &prev->vm_next : &mm->mmap);

@@ -169,7 +169,7 @@ void __swap_free(swp_entry_t entry, unsigned short count)
 		if (p->swap_map[offset] < count)
 			goto bad_count;
 		if (!(p->swap_map[offset] -= count)) {
-			if (offset < p->lowest_bit)
+			if (offset < p->lowest_bit) /* 扩充盘上可供交换的区间，起始区间号 ~ 结束区间号*/
 				p->lowest_bit = offset;
 			if (offset > p->highest_bit)
 				p->highest_bit = offset;

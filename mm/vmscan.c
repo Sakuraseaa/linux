@@ -495,9 +495,9 @@ int page_launder(int gfp_mask, int sync)
 	 */
 	can_get_io_locks = gfp_mask & __GFP_IO;
 
-	launder_loop = 0;
+	launder_loop = 0; /* launder_loop: 最多二次，循环洗页面 */
 	maxlaunder = 0;
-	cleaned_pages = 0;
+	cleaned_pages = 0; /* 累计的被洗干净的页面数 */
 
 dirty_page_rescan:
 	spin_lock(&pagemap_lru_lock);

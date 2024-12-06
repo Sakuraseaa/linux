@@ -1,0 +1,52 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+"${workspaceFolder}/arch/i386/mm",
+"${workspaceFolder}/arch/i386/math-emu",
+"${workspaceFolder}/arch/i386/boot",
+"${workspaceFolder}/arch/i386/kernel",
+"${workspaceFolder}/include/asm-arm",
+"${workspaceFolder}/include/asm-arm/arch-arc",
+"${workspaceFolder}/include/asm-arm/arch-cl7500",
+// "${workspaceFolder}/include/asm-generic",
+"${workspaceFolder}/include/asm-i386",
+// "${workspaceFolder}/include/asm-ia64",
+// "${workspaceFolder}/include/asm-m68k",
+// "${workspaceFolder}/include/asm-mips",
+// "${workspaceFolder}/include/asm-mips64",
+// "${workspaceFolder}/include/asm-parisc",
+// "${workspaceFolder}/include/asm-ppc",
+// "${workspaceFolder}/include/asm-s390",
+// "${workspaceFolder}/include/asm-sh",
+// "${workspaceFolder}/include/asm-sparc",
+// "${workspaceFolder}/include/asm-sparc64",
+"${workspaceFolder}/include/linux",
+"${workspaceFolder}/include/linux/byteorder",
+"${workspaceFolder}/include/linux/lockd",
+"${workspaceFolder}/include/linux/mtd",
+"${workspaceFolder}/include/linux/netfilter_ipv4",
+"${workspaceFolder}/include/linux/netfilter_ipv6",
+"${workspaceFolder}/include/linux/nfsd",
+"${workspaceFolder}/include/linux/raid",
+"${workspaceFolder}/include/linux/sunrpc",
+"${workspaceFolder}/include/math-emu",
+"${workspaceFolder}/include/net",
+"${workspaceFolder}/include/net/irda",
+"${workspaceFolder}/include/pcmcia",
+"${workspaceFolder}/include/scsi",
+"${workspaceFolder}/include/video",
+"${workspaceFolder}/include/",
+"${workspaceFolder}/include/*",
+                "${workspaceFolder}/include/asm-alpha"
+            ],
+            "defines": [],
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "forcedInclude": []
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "interrupt.h": "c",
+        "config.h": "c",
+        "pagemap.h": "c",
+        "mm.h": "c"
+    }
+}
