@@ -336,7 +336,7 @@ static int swap_out(unsigned int priority, int gfp_mask)
 		p = init_mm.mmlist.next;
 		for (; p != &init_mm.mmlist; p = p->next) {
 			struct mm_struct *mm = list_entry(p, struct mm_struct, mmlist);
-	 		if (mm->rss <= 0)
+            if (mm->rss <= 0)
 				continue;
 			found_task++;
 			/* Refresh swap_cnt? */
@@ -428,7 +428,7 @@ struct page * reclaim_page(zone_t * zone)
 		}
 
 		/* OK, remove the page from the caches. */
-                if (PageSwapCache(page)) {
+        if (PageSwapCache(page)) {
 			__delete_from_swap_cache(page);
 			goto found_page;
 		}
@@ -453,8 +453,7 @@ found_page:
 	UnlockPage(page);
 	page->age = PAGE_AGE_START;
 	if (page_count(page) != 1)
-		printk("VM: reclaim_page, found page with count %d!\n",
-				page_count(page));
+		printk("VM: reclaim_page, found page with count %d!\n", page_count(page));
 out:
 	spin_unlock(&pagemap_lru_lock);
 	spin_unlock(&pagecache_lock);
@@ -696,7 +695,7 @@ page_active:
 	return cleaned_pages;
 }
 
-/**
+/** 
  * refill_inactive_scan - scan the active list and find pages to deactivate
  * @priority: the priority at which to scan
  * @oneshot: exit after deactivating one page
@@ -704,6 +703,7 @@ page_active:
  * This function will scan a portion of the active list to find
  * unused pages, those pages will then be moved to the inactive list.
  */
+/* 若某页完全没有引用和寿命的话，会被转入不活跃的脏队列*/
 int refill_inactive_scan(unsigned int priority, int oneshot)
 {
 	struct list_head * page_lru;
@@ -749,7 +749,8 @@ int refill_inactive_scan(unsigned int priority, int oneshot)
 				page_active = 1;
 			}
 		}
-		/*
+		
+        /*
 		 * If the page is still on the active list, move it
 		 * to the other end of the list. Otherwise it was
 		 * deactivated by age_page_down and we exit successfully.
@@ -809,8 +810,8 @@ int inactive_shortage(void)
 {
 	int shortage = 0;
 
-	shortage += freepages.high;
-	shortage += inactive_target;
+	shortage += freepages.high; /* 标定的空闲页面数量 */
+	shortage += inactive_target; /* 不活跃的页面数量 */
 	shortage -= nr_free_pages();
 	shortage -= nr_inactive_clean_pages();
 	shortage -= nr_inactive_dirty_pages;
@@ -853,7 +854,7 @@ static int refill_inactive(unsigned int gfp_mask, int user)
 			__set_current_state(TASK_RUNNING);
 			schedule();
 		}
-
+        /* 扫描活跃页面队列, 试图从中找到可以转入不活跃状态的页面*/
 		while (refill_inactive_scan(priority, 1)) {
 			made_progress = 1;
 			if (--count <= 0)
@@ -871,6 +872,7 @@ static int refill_inactive(unsigned int gfp_mask, int user)
 		/*
 		 * Then, try to page stuff out..
 		 */
+        /* 找到一个进程，扫描其映射表，从中找出可以换入不活跃状态的页面*/
 		while (swap_out(priority, gfp_mask)) {
 			made_progress = 1;
 			if (--count <= 0)
@@ -918,7 +920,7 @@ static int do_try_to_free_pages(unsigned int gfp_mask, int user)
 	 */
 	if (free_shortage() || nr_inactive_dirty_pages > nr_free_pages() +
 			nr_inactive_clean_pages())
-		ret += page_launder(gfp_mask, user);
+		ret += page_launder(gfp_mask, user); /*洗页，把脏页同步到硬盘，把脏页转化成现代页*/
 
 	/*
 	 * If needed, we move pages from the active list
