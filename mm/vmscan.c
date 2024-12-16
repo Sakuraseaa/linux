@@ -269,7 +269,7 @@ static int swap_out_mm(struct mm_struct * mm, int gfp_mask)
 	 * and ptes.
 	 */
 	spin_lock(&mm->page_table_lock);
-	address = mm->swap_address;
+	address = mm->swap_address; /* 表示在执行的过程中要接着考察的页面地址 */
 	vma = find_vma(mm, address);
 	if (vma) {
 		if (address < vma->vm_start)
